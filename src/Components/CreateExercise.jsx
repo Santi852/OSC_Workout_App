@@ -15,7 +15,13 @@ function CreateExercise() {
     const [exerciseName, setExerciseName] = useState('');
     const [type, setType] = useState('WeightBased');
     const [notes, setNotes] = useState('');
+    const [variantOf, setVariantOf] = useState('');
     const [exercises, setExercises] = useState(loadExercises);
+
+    const getExerciseName = (id) => {
+        const match = exercises.find((exercise) => exercise.exerciseID === id);
+        return match ? match.exerciseName : null;
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,6 +34,7 @@ function CreateExercise() {
             exerciseName: exerciseName.trim(),
             type,
             notes,
+            variantOf: variantOf || null,
         };
         const updated = [...exercises, newExercise];
         setExercises(updated);
@@ -36,6 +43,7 @@ function CreateExercise() {
         setExerciseName('');
         setType('WeightBased');
         setNotes('');
+        setVariantOf('');
     };
 
     return (
@@ -64,6 +72,21 @@ function CreateExercise() {
                     </select>
                 </div>
                 <div>
+                    <label htmlFor="variantOf">Variant of:</label>
+                    <select
+                        id="variantOf"
+                        value={variantOf}
+                        onChange={(e) => setVariantOf(e.target.value)}
+                    >
+                        <option value="">None</option>
+                        {exercises.map((exercise) => (
+                            <option key={exercise.exerciseID} value={exercise.exerciseID}>
+                                {exercise.exerciseName}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div>
                     <label htmlFor="notes">Notes:</label>
                     <textarea
                         id="notes"
@@ -82,6 +105,9 @@ function CreateExercise() {
                     {exercises.map((exercise) => (
                         <li key={exercise.exerciseID}>
                             <strong>{exercise.exerciseName}</strong> ({exercise.type})
+                            {exercise.variantOf && getExerciseName(exercise.variantOf) && (
+                                <span> — variant of {getExerciseName(exercise.variantOf)}</span>
+                            )}
                             {exercise.notes && <p>{exercise.notes}</p>}
                         </li>
                     ))}
