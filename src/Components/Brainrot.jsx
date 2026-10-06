@@ -6,7 +6,7 @@ import 'swiper/css/mousewheel';
 import 'swiper/css/pagination';
 import SEARCH_QUERIES from '../Data/brainrot-search-queries.json';
 
-const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;        // API Key from .env file. Uncomment if you have it.
+const API_KEY = process.env.AIzaSyBQyp8dpQmSfxqdQt1L7qhcrDiqOSWCAXg;        // API Key from .env file. Uncomment if you have it.
 // const API_KEY="fakekeyfornow"                                   // Placeholder API Key for testing. Keep if you don't have .env
 //                                                                 // See README.md for directions.
                                                                 
